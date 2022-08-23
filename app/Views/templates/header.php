@@ -2,13 +2,11 @@
 <html>
 <head>
     <link rel="stylesheet" href="https://unpkg.com/flowbite@1.5.2/dist/flowbite.min.css" />
+    <script src="http://127.0.0.1:8080/assets/script.js"></script>
     <title>Neoness with codeigniter</title>
 </head>
 <body>
-
-    <!-- <h1><?= esc($title) ?></h1> -->
-
-  
+ 
 <nav class="bg-white border-gray-200 dark:bg-gray-900">
     <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-l px-4 md:px-6 py-2.5">
         <a href="https://flowbite.com" class="flex items-center">
@@ -41,8 +39,8 @@
     </div>
 </nav>
 
-<script>
-    <script src="https://unpkg.com/flowbite@1.5.2/dist/flowbite.js"></script>
+<script
+     src="https://unpkg.com/flowbite@1.5.2/dist/flowbite.js">
 </script>
 </body>
 </html>

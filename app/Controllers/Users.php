@@ -58,13 +58,20 @@ class Users extends BaseController
                 'weight'  => $this->request->getPost('weight'),
                 'height'  => $this->request->getPost('height'),
                 'weight_goal'  => $this->request->getPost('weight_goal'),
+                'bmi'  => $this->request->getPost('bmi'),
+                
             ]);
-
-            return view('users/success');
+            $data['success'] = "New User created successfully.";
+            return view('templates/header', $data)
+                . view('users/create')
+                . view('templates/footer');
         }
 
         return view('templates/header', ['title' => 'Create a new user'])
             . view('users/create')
             . view('templates/footer');
     }
+
+    
+
 }
