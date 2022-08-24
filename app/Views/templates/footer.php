@@ -2,5 +2,8 @@
 <em>&copy; Exercice d'application de Codeigniter 2022 </em>
 <!-- <em>Exercice d'application de Codeigniter</em> -->
 </div>
+<script
+     src="https://unpkg.com/flowbite@1.5.2/dist/flowbite.js">
+</script>
 </body>
 </html>
