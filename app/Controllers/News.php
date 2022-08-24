@@ -25,7 +25,7 @@ class News extends BaseController
         $model = model(NewsModel::class);
 
         $data['news'] = $model->getNews($slug);
-
+        
         if (empty($data['news'])) {
             throw new \CodeIgniter\Exceptions\PageNotFoundException('Cannot find the news item: ' . $slug);
         }
