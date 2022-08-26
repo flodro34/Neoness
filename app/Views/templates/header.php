@@ -1,8 +1,9 @@
 <!doctype html>
 <html>
 <head>
+    <!-- <link rel="stylesheet" href="public/assets/css/style"> -->
     <link rel="stylesheet" href="https://unpkg.com/flowbite@1.5.2/dist/flowbite.min.css" />
-    <script src="http://127.0.0.1:8080/assets/script.js"></script>
+    <script src="http://localhost/assets/script.js"></script>
     <title>Neoness with codeigniter</title>
 </head>
 <body>
@@ -14,7 +15,7 @@
             <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Neoness</span>
         </a>
         <div class="flex items-center">
-            <a href="#" class="text-sm font-medium text-blue-600 dark:text-blue-500 hover:underline">Login</a>
+            <a href="home" class="text-black-900 font-bold">Admin</a>
         </div>
     </div>
 </nav>
@@ -23,16 +24,34 @@
         <div class="flex items-center">
             <ul class="flex flex-row mt-0 mr-6 space-x-8 text-sm font-medium">
                 <li>
-                    <a href="/home" class="text-gray-900 dark:text-white hover:underline" aria-current="page">Home</a>
+                    <a href="home" 
+                    class="text-gray-900 dark:text-white hover:underline" aria-current="page">
+                    Home
+                </a>
                 </li>
                 <li>
-                    <a href="/news/create" class="text-gray-900 dark:text-white hover:underline">News</a>
+                    <a href="/news/create" 
+                    class="text-gray-900 dark:text-white hover:underline">
+                    News
+                    </a>
                 </li>
                 <li>
-                    <a href="/users/create" class="text-gray-900 dark:text-white hover:underline">Users</a>
+                    <a href="/users/create" 
+                    class="text-gray-900 dark:text-white hover:underline">
+                    Users
+                    </a>
                 </li>
                 <li>
-                    <a href="#" class="text-gray-900 dark:text-white hover:underline">-----</a>
+                    <a href="/register" 
+                    class="text-gray-900 dark:text-white hover:underline">
+                    Register
+                    </a>
+                </li>
+                <li>
+                    <a href="/login" 
+                    class="text-gray-900 dark:text-white hover:underline">
+                    Login
+                    </a>
                 </li>
             </ul>
         </div>

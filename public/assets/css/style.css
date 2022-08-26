@@ -1,0 +1,10 @@
+table {
+    width: 100%;
+}
+
+.users td + td {
+    text-align: right;
+}
+/* .first {
+    width: 200px;
+} */

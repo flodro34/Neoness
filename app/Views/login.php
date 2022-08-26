@@ -6,7 +6,12 @@
               <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                   Sign in to your account
               </h1>
-              <form class="space-y-4 md:space-y-6" action="./" method="POST">
+              <?php if (session()->get('success')):?>
+                <div class="p-4 mb-4 text-sm text-green-700 bg-green-100 rounded-lg dark:bg-green-200 dark:text-green-800" role="alert">
+                  <?= session()->get('success') ?>
+                </div>
+              <?php endif ?>
+              <form class="space-y-4 md:space-y-6" action="/" method="POST">
                   <div>
                       <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
                       <input 
@@ -27,6 +32,11 @@
                         required=""
                       >
                   </div>
+                  <?php if(isset($validation)) : ?>
+                      <div class="p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800" role="alert">
+                          <span class="font-medium">Danger alert!</span><?= $validation->listErrors() ?>
+                      </div>
+                  <?php endif; ?>
                   <div class="flex items-center justify-between">
                       <div class="flex items-start">
                           <div class="flex items-center h-5">
@@ -43,12 +53,15 @@
                         value="submit"
                         class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
                         Sign in
-                    </button>
-                  
+                    </button>                    
               </form>
                     <!-- <p class="text-sm font-light text-gray-500 dark:text-gray-400">
                       Don’t have an account yet? <a href="/users/create" class="font-medium text-primary-600 hover:underline dark:text-primary-500">Sign up</a>
                     </p> -->
+                    <p class="text-sm font-light text-gray-500 dark:text-gray-400">
+                      Don’t have an account yet? <a href="/register" class="font-medium text-primary-600 hover:underline dark:text-primary-500">Sign up</a>
+                    </p>
+
           </div>
       </div>
   </div>

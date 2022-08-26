@@ -17,7 +17,7 @@ if (is_file(SYSTEMPATH . 'Config/Routes.php')) {
  * --------------------------------------------------------------------
  */
 $routes->setDefaultNamespace('App\Controllers');
-$routes->setDefaultController('Home');
+$routes->setDefaultController('Users');
 $routes->setDefaultMethod('index');
 $routes->setTranslateURIDashes(false);
 $routes->set404Override();
@@ -39,16 +39,22 @@ $routes->set404Override();
 $routes->match(['get', 'post'], 'news/create', 'News::create');
 $routes->get('news/(:segment)', 'News::view/$1');
 //routes des users
-$routes->match(['get', 'post'],'users', 'Users::index');
-$routes->match(['get', 'post'], 'users/login', 'Users::login');
-$routes->match(['get', 'post'], 'users/create', 'Users::create');
-$routes->match(['get', 'post'], 'users/update', 'Users::update');
+// $routes->match(['get', 'post'],'users', 'Users::index');
+//route changée : login passe de Views/users/login à Views/templates/
+// $routes->match(['get', 'post'], 'templates/login', 'Users::login');
+// $routes->match(['get', 'post'], 'users/create', 'Users::create');
+// $routes->match(['get', 'post'], 'users/update', 'Users::update');
 
-$routes->post('users/delete/(:segment)', 'Users::delete/$1');
+// $routes->post('users/delete/(:segment)', 'Users::delete/$1');
 
+$routes->match(['get', 'post'],'/', 'Users::index');
+$routes->match(['get', 'post'],'home', 'Users::home');
+//$routes->get('home', 'Users::home');
+$routes->match(['get', 'post'], 'register', 'Users::register');
+// $routes->match(['get', 'post'], 'login', 'Users::index');
 
-$routes->get('users/(:segment)', 'Users::view/$1');
-// $routes->get('users', 'Users::index');
+// $routes->get('users/(:segment)', 'Users::view/$1');
+//$routes->get('/', 'Users::index');
 $routes->get('news', 'News::index');
 $routes->get('pages', 'Pages::index');
 
