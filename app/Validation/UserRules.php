@@ -5,10 +5,10 @@ use App\Models\UserModel;
 class UserRules
 {
     public function validateUser(string $str, string $fiels, array $data){
-        $model = new UserModel();
-        $user = $model->where('email', $data['email'])
-                      ->first();
-
+        $model = model(UserModel::class);
+        
+        $user = $model->where('email', $data['email'])->first();
+                      
         if(!$user){
             return false;
         }        

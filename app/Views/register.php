@@ -1,7 +1,7 @@
 <?= session()->getFlashdata('error') ?>
 
 <div class="container flex flex-col mx-auto px-4 md:max-w-xl">    
-    <form action="/register" method="post">
+    <form action="register" method="post">
         <?= csrf_field() ?>
 
         <div class="relative z-0 mb-6 w-full group">

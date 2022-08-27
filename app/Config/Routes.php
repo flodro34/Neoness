@@ -47,14 +47,17 @@ $routes->get('news/(:segment)', 'News::view/$1');
 
 // $routes->post('users/delete/(:segment)', 'Users::delete/$1');
 
-$routes->match(['get', 'post'],'/', 'Users::index');
-$routes->match(['get', 'post'],'home', 'Users::home');
+$routes->match(['get', 'post'], '/', 'Users::index');
+//$routes->match(['get', 'post'], 'home', 'Users::home');
 //$routes->get('home', 'Users::home');
-$routes->match(['get', 'post'], 'register', 'Users::register');
-// $routes->match(['get', 'post'], 'login', 'Users::index');
+$routes->match(['get', 'post'], 'register', 'Users::registerAndRedirect');
+//$routes->match(['get', 'post'], 'login', 'Users::index');
+// $routes->match(['get', 'post'], 'login/submit', 'Users::test');
 
 // $routes->get('users/(:segment)', 'Users::view/$1');
 //$routes->get('/', 'Users::index');
+
+
 $routes->get('news', 'News::index');
 $routes->get('pages', 'Pages::index');
 

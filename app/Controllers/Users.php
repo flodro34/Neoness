@@ -2,7 +2,7 @@
 
 namespace App\Controllers;
 
-use App\Models\NewsModel;
+use App\Models\UserModel;
 
 class Users extends BaseController
 {
@@ -23,6 +23,7 @@ class Users extends BaseController
     // }
     public function home()
     {
+        var_dump('boubou');
         helper(['form']);
         $model = model(UserModel::class);
 
@@ -91,121 +92,120 @@ class Users extends BaseController
     //         . view('users/create')
     //         . view('templates/footer');
     // }
+
+    // public function test()
+    // {
+    //     $model = model(UserModel::class);
+        
+    // }
     
     public function index()
     {
-        $model = model(UserModel::class);
         $data= array();
         helper(['form']);
-
-        if ($this->request->getMethod() == 'post')
-        {
-            //validation
-            $rules = [
-                'email' => 'required|min_length[6]|max_length[50]|valid_email|is_unique[users.email]',
-                'password' => 'required|min_length[2]|max_length[255]|validateUser[email, password]',
-            ];
-
-            $errors =[
-                'password' => [
-                    'validateUser' => "Email or Password not valid"
-                ]
-            ];
-
-            if (!$this->validate($rules, $errors)){
-                $data['validation'] = $this->validator;
-                $email = $this->request->getPost('email');
-                $user = $model->where('email', $email)->first();
-                $this->setUserSession($user);
-                return redirect()->to ('home');
-                    }
-              
-
-        }else{
-            
-            
-                            
-            //     $model->save([
-            //         'firstname' => $this->request->getVar('firstname'),
-            //         'lastname' => $this->request->getVar('lastname'),
-            //         'email' => $this->request->getVar('email'),
-            //         'password' => $this->request->getVar('password'),
-            //         'phone' => $this->request->getVar('phone'),
-            //         'age' => $this->request->getVar('age'),
-            //         'weight' => $this->request->getVar('weight'),
-            //         'height' => $this->request->getVar('height'),
-            //         'weight_goal' => $this->request->getVar('weight_goal'),
-            //         'bmi'  => $this->request->getVar('bmi'),
-            //         // 'slug'  => url_title($this->request->getVar('firstname', 'lastname'),'-', true),
-            //         ]);
-
-                    // $session = session();
-                    // $session->setFlashdata('success', 'Sucessful Registration');
-                    // $data['success'] = "New User created successfully.";
-
-                    // return redirect()->to('/'); //redirection à la racine
-
-                    // return view('templates/header', $data)
-                    //     . view('register')
-                    //     . view('templates/footer');
-            }
-            return view('templates/header', $data)
-            . view('login')
-            . view('templates/footer');
-        }
- 
-
+        var_dump($_POST);
         
-    public function register()
+            if($this->request->getMethod() == 'POST')
+            {
+        
+                //validation
+                $rules = [
+
+                    'email' => 'required|min_length[6]|max_length[50]|valid_email',
+                    'password' => 'required|min_length[2]|max_length[255]|validateUser[email, password]',
+                ];
+                var_dump('bb');
+                $errors = [
+                    'password' => [
+                        'validateUser' => 'Email or Password not valid'
+                    ]
+                ];
+                
+                if (!$this->validate($rules,  $errors)){
+                    $data['validation'] = $this->validator;
+                }else{
+                    var_dump('tata');
+                    $model = model(UserModel::class);
+
+                    $user = $model->where('email', $this->request->getVar('email'))->first();
+                   
+                    $this->setUserSession($user);
+                    
+                    //$session->setFlashdata('success', 'Sucessful Registration');
+                    //$data['success'] = "New User created successfully.";
+
+                    return redirect()->to('dashboard'); 
+    
+                    }
+            }
+
+        return view('templates/header', $data)
+        . view('login')
+        . view('templates/footer');
+    }
+
+    //fct pour init la session
+    private function setUserSession($user)
+    {
+        $data =[
+            'id'=> $user['id'],
+            'firstname' => $user['firstname'],
+            'lastname'  => $user ['lastname'],
+            'email' => $user ['email'],
+            'isLoggedIn' => true,
+        ];
+        session()->set($data);
+        return true;
+    }
+        
+    public function registerAndRedirect()
     {        
         $data= array();
         helper(['form']);
 
-        if ($this->request->getMethod() == 'post')
-        {
-            //validation
-            $rules = [
-                'firstname' => 'required|min_length[3]|max_length[20]',
-                'lastname' => 'required|min_length[3]|max_length[20]',
-                'email' => 'required|min_length[6]|max_length[50]|valid_email',
-                'password' => 'required|min_length[2]|max_length[255]',
-                'password_confirm' => 'matches[password]',
-                'phone' => 'required',
-                'age' => 'required',
-                'weight' => 'required',
-                'height' => 'required',
-                'weight_goal' => 'required',
-                'bmi' => 'required',
-            ];
-            if (!$this->validate($rules)){
-                $data['validation'] = $this->validator;
-            }else{
-                $model = model(UserModel::class);
-                $model->save([
-                    'firstname' => $this->request->getVar('firstname'),
-                    'lastname' => $this->request->getVar('lastname'),
-                    'email' => $this->request->getVar('email'),
-                    'password' => $this->request->getVar('password'),
-                    'phone' => $this->request->getVar('phone'),
-                    'age' => $this->request->getVar('age'),
-                    'weight' => $this->request->getVar('weight'),
-                    'height' => $this->request->getVar('height'),
-                    'weight_goal' => $this->request->getVar('weight_goal'),
-                    'bmi'  => $this->request->getVar('bmi'),
-                    // 'slug'  => url_title($this->request->getVar('firstname', 'lastname'),'-', true),
-                    ]);
+            if ($this->request->getMethod() == 'post')
+            {
+                //validation
+                $rules = [
+                    'firstname' => 'required|min_length[3]|max_length[20]',
+                    'lastname' => 'required|min_length[3]|max_length[20]',
+                    'email' => 'required|min_length[6]|max_length[50]|valid_email',
+                    'password' => 'required|min_length[2]|max_length[255]',
+                    'password_confirm' => 'matches[password]',
+                    'phone' => 'required',
+                    'age' => 'required',
+                    'weight' => 'required',
+                    'height' => 'required',
+                    'weight_goal' => 'required',
+                    'bmi' => 'required',
+                ];
+                if (!$this->validate($rules)){
+                    $data['validation'] = $this->validator;
+                }else{
+                    $model = model(UserModel::class);
+                    $model->save([
+                        'firstname' => $this->request->getVar('firstname'),
+                        'lastname' => $this->request->getVar('lastname'),
+                        'email' => $this->request->getVar('email'),
+                        'password' => $this->request->getVar('password'),
+                        'phone' => $this->request->getVar('phone'),
+                        'age' => $this->request->getVar('age'),
+                        'weight' => $this->request->getVar('weight'),
+                        'height' => $this->request->getVar('height'),
+                        'weight_goal' => $this->request->getVar('weight_goal'),
+                        'bmi'  => $this->request->getVar('bmi'),
+                        // 'slug'  => url_title($this->request->getVar('firstname', 'lastname'),'-', true),
+                        ]);
 
-                    $session = session();
-                    $session->setFlashdata('success', 'Sucessful Registration');
-                    //$data['success'] = "New User created successfully.";
+                        $session = session();
+                        $session->setFlashdata('success', 'Sucessful Registration');
+                        //$data['success'] = "New User created successfully.";
 
-                    // return redirect()->to('/'); //redirection à la racine
+                        return redirect()->to('/'); //redirection à la racine
 
-                    return view('templates/header', $data)
-                        . view('login')
-                        . view('templates/footer');
+                }
             }
-        }
+
         return view('templates/header', $data)
             . view('register')
             . view('templates/footer');
@@ -294,27 +294,6 @@ class Users extends BaseController
     //     . view('login')
     //     . view('templates/footer');
     // }
-
-    //fct pour init la session
-    private function setUserSession($user)
-    {
-        $data =[
-            'id'=> $user['id'],
-            'firstname' => $user['firstname'],
-            'lastname'  =>$user ['lastname'],
-            'email' => $user ['email'],
-            'password' => $user ['password'],
-            'phone'  => $user ['phone'],
-            'age'  =>$user ['age'],
-            'weight'  => $user ['weight'],
-            'height'  => $user ['height'],
-            'weight_goal'  => $user ['weight_goal'],
-            'bmi'  => $user ['bmi'],
-        ];
-        session()->set($data);
-        return true;
-    }
-
     
     public function delete()
     {
